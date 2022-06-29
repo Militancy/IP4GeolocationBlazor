@@ -5,6 +5,7 @@ This solutions provides code for hosting a Blazor based Server-Side App.
 When running the server. The index page should be opened directly in the default browser of the running machine.
 
 The project itself is constructed that way, that a MaxMind GeoLocation database is required (.mmdb-file).
+The RazorComponent fetch the data from a service and the page will display parts of the CityResponse.
 
 Setup steps:
 
@@ -28,3 +29,7 @@ For building the Unit-Test-Project additional nugets are necessary.
 
 7. If the db file isnt located on the default position. The location has to be adjusted. Keep in mind that the Unit-Tests will run on the debug folder for example.
 
+Manual test:
+
+Host the server and type into the input-field for example 121.121.121.121 and click the search button.
+As a result the Latitude and Longitude should be displayed on the page.
