@@ -1,0 +1,46 @@
+﻿<PageTitle>IP GeoLocation LookUp</PageTitle>
+
+@using IP4ToGeolocation.Data
+@using MaxMind.GeoIP2.Responses
+@inject IP4GeolocationService GeolocationService
+@inject IHttpContextAccessor httpContextAccessor
+
+<h1>IPGeolocation</h1>
+
+<p>This component demonstrates fetching data from a geo-database.</p>
+
+<label>IP to Lookup: </label> <input @bind-value=@ip />
+<br>
+<button style="margin-bottom: 5vh" onclick=@LookUpIPLocation>Search</button>
+@if (geoResponse != null)
+{
+    <p>Lat: @geoResponse.Location.Latitude</p>
+    <p>Long: @geoResponse.Location.Longitude</p>
+}
+else
+{
+    <p style="color: red">No results found for the current IP</p>
+}
+
+@code {
+    private CityResponse? geoResponse;
+    private string? ip;
+
+    /*
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+    */
+
+    private async void LookUpIPLocation()
+    {
+        if (!string.IsNullOrWhiteSpace(ip))
+        {
+            CityResponse? response = await GeolocationService.GetGeolocationAsync(ip);
+
+            geoResponse = response;
+            
+        }
+    }
+}
